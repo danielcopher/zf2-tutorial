@@ -1,3 +1,4 @@
+<?php /* this file renders the head + nav bar */ ?>
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
@@ -28,17 +29,22 @@
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">
+                <div class="navbar-header" style="position:relative">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">
+					
+					<img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>
+					<img style="position:absolute;left:0px" src="<?php echo $this->basePath('img/skeleton.png') ?>" alt="Skeleton"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+						<li class="active"><a href="<?php echo $this->url('album') ?>"><?php echo $this->translate('Album') ?></a></li>
+						<li class="active"><a href="<?php echo $this->url('album-rest') ?>"><?php echo $this->translate('AlbumRest') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -47,7 +53,7 @@
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; <?php echo date('Y') ?> by Reaction Dude Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>

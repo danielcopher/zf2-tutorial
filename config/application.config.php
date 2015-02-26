@@ -3,6 +3,8 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
+		'Album',                  // <-- DPC Added this line for Album module
+		'AlbumRest',              // <-- DPC Added this line for AlbumRest module
     ),
 
     // These are various options for the listeners attached to the ModuleManager

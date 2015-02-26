@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit Bootstrap="Bootstrap.php">
+    <testsuites>
+        <testsuite name="zf2tutorial">
+            <directory>./AlbumRest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

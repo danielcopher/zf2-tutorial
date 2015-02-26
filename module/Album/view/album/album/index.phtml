@@ -1,0 +1,120 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'My albums';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('album', array('action'=>'add'));?>">Add new album</a>
+</p>
+
+ <table class="table">
+     <tr>
+         <th>Title</th>
+         <th>Artist</th>
+         <th>&nbsp;</th>
+     </tr>
+     <?php foreach ($this->paginator as $album) : // <-- change here! ?>
+         <tr>
+             <td><?php echo $this->escapeHtml($album->title);?></td>
+             <td><?php echo $this->escapeHtml($album->artist);?></td>
+             <td>
+				<div class="btn-toolbar">
+					<div class="btn-group">
+					<a class="btn" href="<?php echo $this->url('album', 
+						array('action' => 'edit', 'id' => $album->id));?>">Edit</a>
+					<a class="btn" href="<?php echo $this->url('album',
+						array('action' => 'delete', 'id' => $album->id));?>">Delete</a>
+					<a class="btn" onclick="getRest('<?php echo $this->url('album-rest',array('action' => 'album-rest', 'id' => $album->id));?>','<?php echo $album->id;?>')">REST</a>
+					</div>
+				</div>
+				<div class="rest_<?php echo $album->id;?>"></div>
+             </td>
+         </tr> 
+     <?php endforeach; ?>
+ </table>
+ <?php echo $this->headScript()->appendFile($this->basePath() . '/js/ajaxform-up.js'); ?>
+  <?php
+ // add at the end of the file after the table
+ echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'Sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'album'
+     )
+ );
+ ?>
+ 
+ <script>
+function getRest(url,loc) {
+$('.rest_'+loc).show();
+	$('.rest_'+loc).load(url);
+	$('.rest_'+loc).addClass("glyphicon glyphicon-remove glyph_"+loc);
+	$('.rest_'+loc).append( "<p>Test</p>" );
+	$('.glyphicon.glyphicon-remove.rest_'+loc).css('cursor','pointer');
+	$('.glyphicon.glyphicon-remove.rest_'+loc).attr('title','click to hide');
+
+	$('.glyph_'+loc).click(function() {
+		$('.rest_'+loc).hide();
+	});
+}
+
+ $(document).ready(function() {
+	 
+	//alert('wat'); 
+	  
+ });
+ 
+ 
+ $(document).ready(function(){
+    animateDiv();
+    
+});
+
+function makeNewPosition(){
+    
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    
+    return [nh,nw];    
+    
+}
+
+function animateDiv(){
+    var newq = makeNewPosition();
+    var oldq = $('.a').offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    
+    $('.a').animate({ top: newq[0], left: newq[1] }, speed, function(){
+      animateDiv();        
+    });
+    
+};
+
+function calcSpeed(prev, next) {
+    
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    
+    var greatest = x > y ? x : y;
+    
+    var speedModifier = 0.1;
+
+    var speed = Math.ceil(greatest/speedModifier);
+
+    return speed;
+
+}
+
+ 
+ </script>
