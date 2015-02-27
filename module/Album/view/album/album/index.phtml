@@ -26,7 +26,8 @@ $this->headTitle($title);
 						array('action' => 'edit', 'id' => $album->id));?>">Edit</a>
 					<a class="btn" href="<?php echo $this->url('album',
 						array('action' => 'delete', 'id' => $album->id));?>">Delete</a>
-					<a class="btn" onclick="getRest('<?php echo $this->url('album-rest',array('action' => 'album-rest', 'id' => $album->id));?>','<?php echo $album->id;?>')">REST</a>
+					<a class="btn" onclick="getRest('<?php echo $this->url('album-rest',
+						array('action' => 'album-rest', 'id' => $album->id));?>','<?php echo $album->id;?>')">REST</a>
 					</div>
 				</div>
 				<div class="rest_<?php echo $album->id;?>"></div>
@@ -56,10 +57,8 @@ function getRest(url,loc) {
 $('.rest_'+loc).show();
 	$('.rest_'+loc).load(url);
 	$('.rest_'+loc).addClass("glyphicon glyphicon-remove glyph_"+loc);
-	$('.rest_'+loc).append( "<p>Test</p>" );
 	$('.glyphicon.glyphicon-remove.rest_'+loc).css('cursor','pointer');
 	$('.glyphicon.glyphicon-remove.rest_'+loc).attr('title','click to hide');
-
 	$('.glyph_'+loc).click(function() {
 		$('.rest_'+loc).hide();
 	});
